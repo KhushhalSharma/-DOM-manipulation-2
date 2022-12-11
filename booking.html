@@ -1,0 +1,108 @@
+<html>
+
+<head>
+  <title>Web20-C4</title>
+  <link rel="stylesheet" href="./Styles/table.css" />
+  <link rel="stylesheet" href="./Styles/navbar.css" />
+</head>
+<style>
+  #tr {
+    background-color: yellow;
+    border: 0;
+    padding: 10px 20px;
+  }
+
+  table {
+    width: 100%;
+    margin: auto;
+  }
+
+  tbody {
+    text-align: center;
+    border: 0;
+  }
+</style>
+
+<body>
+  <div id="navbar">
+    <h2>Multiplex</h2>
+    <div>
+      <a href="./index.html">
+        <h2>Home</h2>
+      </a>
+      <a href="./booking.html">
+        <h2>All Movies</h2>
+      </a>
+      <a href="./buy.html">
+        <h2>My Movies</h2>
+      </a>
+    </div>
+  </div>
+  <select id="filter">
+    <option value="">Select Category</option>
+    <option value="Fiction">Fiction</option>
+    <option value="Action">Action</option>
+    <option value="Comedy">Comedy</option>
+  </select>
+  <h1>Current Movies:- <span id="movie-count">0</span></h1>
+  <table border="1" cellSapcing="0">
+    <thead>
+      <tr id="tr">
+        <th>Name</th>
+        <th>Main Actor</th>
+        <th>Description</th>
+        <th>Release Date</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Buy Ticket</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Append table rows here  -->
+    </tbody>
+  </table>
+</body>
+<script>
+  let bookings = JSON.parse(localStorage.getItem("movie-list"));
+
+  bookings.forEach(function (el) {
+    let trow = document.createElement("tr")
+    let td1 = document.createElement("td");
+    td1.innerText = el.Moviename;
+    let td2 = document.createElement("td");
+    td2.innerText = el.mainActor;
+    let td3 = document.createElement("td");
+    td3.innerText = el.desc;
+    let td4 = document.createElement("td");
+    td4.innerText = el.release;
+    let td5 = document.createElement("td");
+    td5.innerText = el.category;
+    let td6 = document.createElement("td");
+    td6.innerText = el.price;
+    let td7 = document.createElement("td");
+    td7.innerText = "Buy"
+    td7.style.backgroundColor = "green"
+    td7.style.cursor = "pointer"
+    td7.addEventListener("click", function () {
+      buy(el)
+
+    })
+
+    trow.append(td1, td2, td3, td4, td5, td6, td7);
+    document.querySelector("tbody").append(trow)
+  })
+
+
+  let bookmark=[];
+    function buy(el){
+      bookmark.push(el);
+      localStorage.setItem("bookmarks",JSON.stringify(bookmark))
+    }
+
+
+  
+
+
+</script>
+
+</html>
